@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdlib.h>
 using namespace std;
 
 struct Tarefa{
@@ -23,6 +24,18 @@ void adicionarTarefa(){
 	getline(cin, tarefa.descricao);
 	
 	ofstream arquivo("tarefas.txt", ios::app);
+	
+	if(arquivo.is_open()){
+		arquivo << tarefa.titulo << endl;
+		arquivo << tarefa.descricao << endl;
+		
+		arquivo.close();
+		
+		cout << "Tarefa adicionada com sucesso!" << endl;
+	}else{
+		cout << "Erro ao adicinar tarefa" << endl;
+	}
+	
 }
 
 int main(){
@@ -36,7 +49,10 @@ int main(){
 		cout << "[ 3 ] - Editar tarefa" << endl;
 		cout << "[ 4 ] - Excluir tarefa" << endl;
 		cout << "[ 5 ] - Sair" << endl;
+		cout << "Opcao: ";
 		cin >> opcao;
+		
+		system("cls");
 		
 		switch(opcao){
 			case 1:
