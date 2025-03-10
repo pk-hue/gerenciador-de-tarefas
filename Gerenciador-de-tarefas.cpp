@@ -15,27 +15,44 @@ struct Tarefa{
 void adicionarTarefa(){
 	Tarefa tarefa;
 	
-	cout << "Adicione o titulo da tarefa: "	<< endl;
+	cout << "Adicione o titulo da tarefa: "	<< "\n";
 	cin.ignore();
 	getline(cin, tarefa.titulo);
 	
-	cout << "Adicione a descricao da tarefa: " << endl;
+	cout << "Adicione a descricao da tarefa: " << "\n";
 	cin.ignore();
 	getline(cin, tarefa.descricao);
 	
 	ofstream arquivo("tarefas.txt", ios::app);
 	
 	if(arquivo.is_open()){
-		arquivo << tarefa.titulo << endl;
-		arquivo << tarefa.descricao << endl;
+		arquivo << tarefa.titulo << "\n";
+		arquivo << tarefa.descricao << "\n";
 		
 		arquivo.close();
 		
-		cout << "Tarefa adicionada com sucesso!" << endl;
+		cout << "Tarefa adicionada com sucesso!" << "\n";
 	}else{
-		cout << "Erro ao adicinar tarefa" << endl;
+		cout << "Erro ao adicinar tarefa!" << "\n";
+		system("pause");
 	}
 	
+}
+
+void visualizarTarefa(){
+	ifstream arquivo("tarefa.txt");
+	
+	if(arquivo.is_open()){
+		string linha{""};
+		
+		while(getline(arquivo, linha)){
+			cout << linha << "\n";
+		}
+		arquivo.close();
+	}else{
+		cout << "Erro ao visualizar tarefa!" << "\n";
+		system("pause");
+	}
 }
 
 int main(){
@@ -43,12 +60,12 @@ int main(){
 	
 	do{
 		
-		cout << "Selecione uma das opcoes abaixo:" << endl;
-		cout << "[ 1 ] - Adicionar tarefa" << endl;
-		cout << "[ 2 ] - Visualizar tarefa" << endl;
-		cout << "[ 3 ] - Editar tarefa" << endl;
-		cout << "[ 4 ] - Excluir tarefa" << endl;
-		cout << "[ 5 ] - Sair" << endl;
+		cout << "Selecione uma das opcoes abaixo:" << "\n";
+		cout << "[ 1 ] - Adicionar tarefa" << "\n";
+		cout << "[ 2 ] - Visualizar tarefa" << "\n";
+		cout << "[ 3 ] - Editar tarefa" << "\n";
+		cout << "[ 4 ] - Excluir tarefa" << "\n";
+		cout << "[ 5 ] - Sair" << "\n";
 		cout << "Opcao: ";
 		cin >> opcao;
 		
@@ -59,19 +76,19 @@ int main(){
 				adicionarTarefa();
 				break;
 			case 2:
-				cout << "Visualizar tarefa" << endl; // <-- supondo chamado da função antes da criação
+				visualizarTarefa(); 
 				break;
 			case 3:
-				cout << "Editar tarefa" << endl;
+				cout << "Editar tarefa" << "\n"; // <-- supondo chamado da função antes da criação
 				break;
 			case 4: 
-				cout << "Excluir tarefa" << endl;
+				cout << "Excluir tarefa" << "\n";
 				break;
 			case 5:
-				cout << "Encerrando programa..." << endl;
+				cout << "Encerrando programa..." << "\n";
 				break;
 			default:
-				cout << "Opcao invalida" << endl;
+				cout << "Opcao invalida" << "\n";
 				break;
 		}
 		
