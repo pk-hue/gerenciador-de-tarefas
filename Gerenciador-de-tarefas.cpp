@@ -30,14 +30,13 @@ void adicionarTarefa(){
 		
 		arquivo.close();
 		
-		cout << "Tarefa adicionada com sucesso! " << "\n";
 		system("cls");
+		cout << "Tarefa adicionada com sucesso! " << "\n";
 	}else{
 		cout << "Erro ao adicinar tarefa." << "\n";
 		system("pause");
 	}
 }
-
 
 void visualizarTarefa(){
 	ifstream arquivo("tarefas.txt");
@@ -66,14 +65,14 @@ void editarTarefa() {
 
     ifstream arquivoAntigo("tarefas.txt");
 
-    if (arquivoAntigo.is_open()) {
+    if(arquivoAntigo.is_open()) {
         string linha;
         string tituloNovo, descricaoNova;
         string arquivoTemporario = "temp.txt";
 
         ofstream arquivoNovo(arquivoTemporario, ios::out);
 
-        if (arquivoNovo.is_open()) {
+        if(arquivoNovo.is_open()) {
             while (getline(arquivoAntigo, linha)) {
                 if (linha.find("Titulo: ") == 0) {
                     string tituloAtual = linha.substr(8); 
@@ -92,7 +91,6 @@ void editarTarefa() {
                         continue; 
                     }
                 }
-
                 arquivoNovo << linha << "\n";
             }
 
@@ -105,13 +103,83 @@ void editarTarefa() {
             cout << "Tarefa editada com sucesso!" << "\n";
             system("cls");
         } else {
-            cout << "Erro ao abrir o arquivo temporário. \n";
+            cout << "Erro ao abrir o editar tarefa." << "\n";
             system("pause");
         }
     } else {
-        cout << "Erro ao abrir o arquivo antigo. \n";
+        cout << "Erro ao abrir tarefa antiga." << "\n";
         system("pause");
     }
+}
+
+void excluirTarefa(){
+	string tarefaExcluir;
+    cout << "Informe o titulo da tarefa que deseja excluir: ";
+    cin.ignore();
+    getline(cin, tarefaExcluir);
+    
+    ifstream arquivoExcluir("tarefas.txt");
+    
+    if(arquivoExcluir.is_open()){
+    	string linha;
+    	string arquivoTemporario = "temp.txt";
+    	
+    	ofstream arquivoNovo(arquivoTemporario, ios::app);
+    	
+    	bool tarefaEncontrada = false;
+    	
+    	if(arquivoNovo.is_open()){
+    		while(getline(arquivoExcluir, linha)){
+    			if(linha.find("Titulo: ") == 0){
+    				string tituloAtual = linha.substr(8);
+    				
+    				if(tituloAtual == tarefaExcluir){
+                        string descricao;
+                        getline(arquivoExcluir, descricao);
+
+                        cout << "\nTarefa encontrada:\n";
+                        cout << linha << "\n";
+                        cout << descricao << "\n";
+
+                        char confirmacao;
+                        cout << "Tem certeza que deseja excluir esta tarefa? (S/N): ";
+                        cin >> confirmacao;
+                        confirmacao = toupper(confirmacao); 
+
+                        if (confirmacao == 'S') {
+                            cout << "Tarefa excluída com sucesso!" << "\n";
+                            tarefaEncontrada = true;
+                            continue; 
+                        } else {
+                            arquivoNovo << linha << "\n";
+                            arquivoNovo << descricao << "\n";
+                            tarefaEncontrada = true;
+                            system("cls");
+                            continue;
+                        }
+    				}
+				}
+			arquivoNovo << linha << "\n";
+			}
+			arquivoExcluir.close();
+            arquivoNovo.close();	
+            	
+            remove("tarefas.txt");
+            rename("temp.txt", "tarefas.txt");
+            
+            if (!tarefaEncontrada) {
+                cout << "Tarefa nao encontrada.\n";
+            }
+            system("pause");
+            system("cls");
+		}else{
+			cout << "Erro ao excluir tarefa." << "\n";
+            system("pause");
+		}
+	}else{
+		cout << "Erro ao abrir tarefa antiga" << "\n";
+        system("pause");
+	}
 }
 
 
@@ -143,7 +211,7 @@ int main(){
 				editarTarefa(); 
 				break;
 			case 4: 
-				cout << "Excluir tarefa" << "\n"; // <-- supondo chamado da função antes da criação
+				excluirTarefa();
 				break;
 			case 5:
 				cout << "Encerrando programa..." << "\n";
