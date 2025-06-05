@@ -27,7 +27,6 @@ Manipulação de arquivos
 
 Interface via terminal (CLI)
 
-
 ---
 
 ## 🛠️ Requisitos
