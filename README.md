@@ -37,7 +37,6 @@ Interface via terminal (CLI)
 
 ---
 
-
 ## ▶️ Como Compilar e Executar
 
 ### Usando `g++` no terminal:
