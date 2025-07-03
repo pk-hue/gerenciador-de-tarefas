@@ -44,3 +44,4 @@ Interface via terminal (CLI)
 ```bash
 g++ -std=c++11 Gerenciador-de-tarefas.cpp -o gerenciador_de_tarefas
 ./gerenciador_de_tarefas
+
