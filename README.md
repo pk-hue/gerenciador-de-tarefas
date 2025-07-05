@@ -6,7 +6,6 @@ Este projeto é um **gerenciador de tarefas** desenvolvido em **C++**, com inter
 
 ---
 
-
 ## 🔧 Funcionalidades
 
 - Adicionar novas tarefas
