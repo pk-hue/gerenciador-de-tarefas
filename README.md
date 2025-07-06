@@ -16,6 +16,7 @@ Este projeto é um **gerenciador de tarefas** desenvolvido em **C++**, com inter
 
 ---
 
+
 ## 📁 Estrutura do Projeto
 
 📌 Tecnologias e Conceitos Utilizados
